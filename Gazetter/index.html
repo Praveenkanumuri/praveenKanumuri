@@ -1,0 +1,215 @@
+<!-- The document type declaration -->
+<!DOCTYPE html>
+<!-- The HTML document starts here -->
+<html lang="en">
+  <head>
+    <!-- Meta tags -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="'author" content="Praveen Kanumuri">
+    <!-- The title of the page -->
+    <title>Gazetteer - World's information at your fingertips</title>
+    <!-- Importing Bootstrap CSS -->
+    <link href="./libs/css/bootstrapcss/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Importing Leaflet CSS for maps -->
+    <link rel="stylesheet" href="./libs/leaflet/leaflet.css"/>
+
+    <!-- Importing EasyButton CSS for Leaflet -->
+    <link rel="stylesheet" href="./libs/leaflet/Leaflet.easy/easy-button.css"/>
+
+    <!-- Importing Font Awesome icons CSS -->
+    <link rel="stylesheet" href="https://kit.fontawesome.com/9ee51a00b1.css" crossorigin="anonymous">
+
+    <!-- Importing Leaflet Extra Markers plugin CSS -->
+    <link rel="stylesheet" href="libs/leaflet/Leaflet.extra/leaflet.extra-markers.min.css">
+
+    <!-- Importing Leaflet Marker Cluster plugin CSS -->
+    <link rel="stylesheet" href="libs/leaflet/Leaflet.markercluster-1.4.1/dist/MarkerCluster.css">
+    <link rel="stylesheet" href="libs/leaflet/Leaflet.markercluster-1.4.1/dist/MarkerCluster.Default.css">
+
+<!-- Importing custom styles -->
+<link rel="stylesheet" href="./libs/css/styles.css" />
+
+  </head>
+  <body>
+  <!-- The header section -->
+    <header id="header">
+        <nav class="navbar" id="navBar">
+          <!-- Placeholder for logo or other header elements -->
+          <h4>&nbsp;</h4>
+          <!-- Dropdown for selecting country code -->
+          <div id="selectDropdown">
+              <select class="form-cont" id="countryCode"></select>
+          </div>  
+          <!-- Placeholder for other header elements -->
+          <h4>&nbsp;</h4>
+        </nav>
+    </header>
+    <!-- Preloader animation while the page loads -->
+    <div id="preloader"></div> 
+    <!-- The container for the map -->
+    <div id="mapContainer">   
+        <div id="mapDiv"></div>
+    </div>
+
+<!-- A modal dialog for currency conversion -->
+  <div class="modal fade" id="currencyModal">
+    <div class="modal-dialog">
+      <div class="modal-content" id="modalContent">
+      
+       <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title" id="currencyHead"></h4>
+          <button id='close1' type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+      
+        <!-- Modal body -->
+        <div class="modal-body" id="currencyBody">
+          <!-- Input form for the amount to convert and the selected currency -->
+          <div class="lineI">
+            <h3 class="info" id="cCCode"></h3>
+            <h4 class="info" id="rightFloat"><input type="text" class="form-control" id="reqAmount" placeholder="Enter a value to convert" required=""></h4>
+          </div>
+        
+          <!-- The converted amounts for the currencies GBP, USD, and EUR -->
+          <div class="lineI">
+            <h3 class="info" id="gbpCode">GBP</h3>
+            <h3 class="info" id="rightFloat"><span id='ConvertedAmountGBP'></span></h3>
+          </div>
+          <div class="lineI">
+            <h3 class="info" id="usdCode">USD</h3>
+            <h3 class="info" id="rightFloat"><span id='ConvertedAmountUSD'></span></h3>
+          </div>
+          <div class="lineI">
+            <h3 class="info" id="eurCode">EUR</h3>
+            <h3 class="info" id="rightFloat"><span id='ConvertedAmountEUR'></span></h3>
+          </div>
+        </div>     
+    
+        <!-- Modal footer with a button to initiate the conversion -->
+        <div class="modal-footer">
+          <button id="convertButton" type="button" class="btn btn-primary">Convert</button>
+        </div>
+    
+      </div>
+    </div>
+  </div>
+    <!-- Modal for displaying country information -->
+<div class="modal fade" id="informationModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="modalContent">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h2 class="modal-title" id="countryName"></h2>
+        <h2><span id="flagImg"></span></h2>
+        <button id="close2" type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" id="infoBody">
+        <div class="lineI">
+          <h3 class="info">Official Name:</h3>
+          <h3 class="info1" id="officalName"></h3>
+        </div>
+        <div class="lineI">
+          <h3 class="info">Capital:</h3>
+          <h3 class="info1" id="capitalName"></h3>
+        </div>
+        <div class="lineI">
+          <h3 class="info">Continent:</h3>
+          <h3 class="info1" id="continentName"></h3>
+        </div>
+        <div class="lineI">
+          <h3 class="info">Population:</h3>
+          <h3 class="info1" id="population"></h3>
+        </div>
+        <div class="lineI">
+          <h3 class="info">Currency Name:</h3>
+          <h3 class="info1" id="currencyName"></h3>
+        </div>
+        <div class="lineI">
+          <h3 class="info">Currency Code:</h3>
+          <h3 class="info1" id="currencyCode"></h3>
+        </div>
+        <div class="lineI">
+          <h3 class="info">Total Area:</h3>
+          <h3 class="info1" id="area"></h3>
+        </div>
+        <div class="lineI">
+          <h3 class="info">Country Calling Code:</h3>
+          <h3 class="info1" id="callCode"></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- A modal for displaying weather information -->
+<div class="modal fade" id="weatherModal">
+  <div class="modal-dialog">
+    <div class="modal-content" id="modalContent">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h2 class="modal-title" id="weatherTitle"></h2>
+        <button id="close3" type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" id="weatherBod">
+        <h4 id="weatherBo" class="weatherData"></h4>
+        <h4 id="feelsLikeTemp" class="weatherData"></h4>
+        <h4 id="temp" class="weatherData"></h4>
+        <h4 id="humidity" class="weatherData"></h4>
+        <h4 id="pressure" class="weatherData"></h4>
+        <h4 id="windData" class="weatherData"></h4>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End of the Weather Modal -->
+  <!-- News Modal -->
+<div class="modal fade" id="newsModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="modalContent">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title" id="newsTitle"></h4>
+        <button id="close4" type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" id="newsBody"> 
+        <div id="news1Img"><!-- News 1 Image --></div>
+        <div id="news1"><!-- News 1 Title and Description --></div>
+        <div id="news2Img"><!-- News 2 Image --></div>
+        <div id="news2"><!-- News 2 Title and Description --></div>
+        <div id="news3Img"><!-- News 3 Image --></div>
+        <div id="news3"><!-- News 3 Title and Description --></div>
+        <div id="news4Img"><!-- News 4 Image --></div>
+        <div id="news4"><!-- News 4 Title and Description --></div>
+        <div id="news5Img"><!-- News 5 Image --></div>
+        <div id="news5"><!-- News 5 Title and Description --></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Importing jQuery library -->
+<script type="application/javascript" src="libs/js/jquery-2.2.3.min.js"></script>
+<!-- Importing Bootstrap library -->
+<script src="./libs/js/bootstrapjs/bootstrap.min.js"></script>
+<!-- Importing Leaflet library for maps -->
+<script src="./libs/leaflet/leaflet.js"></script>
+<!-- Importing EasyButton plugin for Leaflet -->
+<script src="./libs/leaflet/Leaflet.easy/easy-button.js"></script>
+<!-- Importing Font Awesome icons -->
+<script src="https://kit.fontawesome.com/9ee51a00b1.js" crossorigin="anonymous"></script>
+<!-- Importing Leaflet Extra Markers plugin -->
+<script src="libs/leaflet/Leaflet.extra/leaflet.extra-markers.min.js"></script>
+<!-- Importing Leaflet Marker Cluster plugin -->
+<script src="libs/leaflet/Leaflet.markercluster-1.4.1/dist/leaflet.markercluster-src.js"></script>
+<script src="libs/leaflet/Leaflet.markercluster-1.4.1/src/MarkerCluster.js"></script>
+<!-- Importing the app.js file for our custom JavaScript code -->
+<script src="./libs/js/app.js"></script>
+</body>
+</html>

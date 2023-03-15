@@ -1,0 +1,162 @@
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background: #000;
+  opacity: 0.5;
+}
+
+#preloader:before {
+  content: "";
+  position: fixed;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+  border: 6px solid #f2f2f2;
+  border-top: 6px solid #56829e;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: animate-preloader 1s linear infinite;
+  animation: animate-preloader 1s linear infinite;
+}
+
+@-webkit-keyframes animate-preloader {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animate-preloader {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@media (min-width: 576px) {
+  .modal-dialog-centered {
+    min-height: calc(100% - (1.75rem * 2));
+  }
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(103, 191, 231, 255);
+}
+
+body {
+  margin-bottom: 0;
+  height: calc(100% - 50px);
+  height: -moz-calc(100% - 50px);
+  height: -webkit-calc(100% - 50px);
+  position: relative;
+  overflow: hidden;
+}
+
+#mapContainer, #mapDiv {
+  height: 100%;
+}
+
+.navbar {
+  position: relative;
+  background-color: rgba(103, 191, 231, 255);
+}
+
+.close {
+  align: right;
+  margin-right: 15px;
+  margin-top: 5px;
+  background-color: rgba(103, 191, 231, 255);
+}
+
+.modal-body {
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.newsStory {
+  font-size: 20px;
+  padding-left: 20px;
+}
+
+.newsdiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a.urlLink {
+  color: royalblue;
+  text-decoration: none;
+}
+
+a.urlLink:hover {
+  text-decoration: underline;
+}
+
+a.urlLink:active {
+  color: rgb(255, 64, 0);
+}
+
+.newsImage {
+  max-width: 100%;
+  max-height: 50%;
+}
+
+.lineI {
+  text-align: left;
+}
+
+.info {
+  display: inline-block;
+}
+
+.info1 {
+  text-align: justify;
+  display: inline-block;
+  float: right;
+}
+
+#rightFloat {
+  float: right;
+}
+
+#weatherBod, #infoBody, #currencyBody, #newsBody {
+  font-family: sans-serif;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+#weatherBod {
+  display: flex;
+}
+
+#weatherTitle {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#modalContent {
+  background-color: rgba(103, 191, 231, 255);
+}
+
+
+
