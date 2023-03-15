@@ -360,7 +360,7 @@ $.ajax({
         },
         success: function(result) {
 
-            //console.log(JSON.stringify(result));
+            console.log(JSON.stringify(result));
 
             if (result.status.name == "ok") {
             
@@ -392,7 +392,7 @@ $.ajax({
             country: $('#countryCode').val()
           },
           success: function(result) {
-            console.log(JSON.stringify(result));
+            // console.log(JSON.stringify(result));
             var newsLink = {};
             var newsTitle = {};
             var newsImage = {};
