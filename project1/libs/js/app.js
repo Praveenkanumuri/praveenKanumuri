@@ -352,29 +352,37 @@ $.ajax({
           }
       });
       $.ajax({
-          url: "libs/php/countryinfo2.php",
-          type: 'POST',
-          dataType: 'json',
-          data: {
-              country: $('#countryCode').val()
-          },
-          success: result => {
-              if (result.status.name == "ok") {
-                  const { callingCode, currency } = result['data'];
-                  const { name: currencyName, code: currencyCode } = currency;
-                  const { isoNameFull: officialName } = result['data'];
-          
-                  $('#callCode').html(callingCode);
-                  $('#currencyName').html(currencyName);
-                  $('#currencyCode').html(currencyCode);
-                  $('#officalName').html(officialName);
-              }
-          },
-          error: (jqXHR, textStatus, errorThrown) => {
-              console.log(textStatus);
-              console.log(errorThrown);
-              console.log(jqXHR);
-          }
+        url: "libs/php/countryData.php",
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            country: $('#countryCode').val()
+        },
+        success: function(result) {
+
+            //console.log(JSON.stringify(result));
+
+            if (result.status.name == "ok") {
+            
+                if (result.status.name == "ok") {
+                  
+                 
+                
+                    $('#callCode').html(result['data']['callingCode']);
+                    $('#currencyName').html(result['data']['currency']['name']);
+                    $('#currencyCode').html(result['data']['currency']['code']);
+                    $('#officalName').html(result['data']['isoNameFull']);
+    
+                 }
+
+            }
+        
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus);
+            console.log(errorThrown);
+            console.log(jqXHR);
+        }
       });
       $.ajax({
           url: "libs/php/news.php",
