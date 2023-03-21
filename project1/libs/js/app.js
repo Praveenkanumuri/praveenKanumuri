@@ -57,7 +57,7 @@ currencyCodes.forEach(code => {
             if (result.status.name == "ok") {
                 
                 // use the currency code to dynamically update the corresponding element
-                $('#ConvertedAmount' + code).html(result['data']['result']);
+                $('#ConvertedAmount' + code).html((result['data']['result']).toFixed(2));
                 
             }
         
@@ -110,14 +110,14 @@ function weatherUpdate() {
           $('#weatherModalLabel').html(capitalName + ", " + countryName);
           $('#todayConditions').html(capitalizeFirstLetter(result['data']['daily'][0]['weather'][0]['description']));
           $('#todayIcon').attr("src",'https://openweathermap.org/img/w/'+result['data']['daily'][0]['weather'][0]['icon']+'.png' ) ;
-          $('#todayMaxTemp').html(result['data']['daily'][0]['temp']['max']);
-          $('#todayMinTemp').html(result['data']['daily'][0]['temp']['min']);
+          $('#todayMaxTemp').html(Math.round(result['data']['daily'][0]['temp']['max']));
+          $('#todayMinTemp').html(Math.round(result['data']['daily'][0]['temp']['min']));
           $('#day1Icon').attr("src",'https://openweathermap.org/img/w/'+result['data']['daily'][1]['weather'][0]['icon']+'.png');
-          $('#day1MinTemp').text(result['data']['daily'][1]['temp']['min']);
-          $('#day1MaxTemp').text(result['data']['daily'][1]['temp']['max']);
+          $('#day1MinTemp').text(Math.round(result['data']['daily'][1]['temp']['min']));
+          $('#day1MaxTemp').text(Math.round(result['data']['daily'][1]['temp']['max']));
           $('#day2Icon').attr("src",'https://openweathermap.org/img/w/'+result['data']['daily'][2]['weather'][0]['icon']+'.png');
-          $('#day2MinTemp').text(result['data']['daily'][2]['temp']['min']);
-          $('#day2MaxTemp').text(result['data']['daily'][2]['temp']['max']);
+          $('#day2MinTemp').text(Math.round(result['data']['daily'][2]['temp']['min']));
+          $('#day2MaxTemp').text(Math.round(result['data']['daily'][2]['temp']['max']));
           $('#day1Date').text(formattedDates[0]);
           $('#day2Date').text(formattedDates[1]);
           $('#lastUpdated').text(formattedTime);
