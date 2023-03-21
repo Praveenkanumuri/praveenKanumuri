@@ -7,7 +7,7 @@
     $executionStartTime = microtime(true);
 
     // Construct the OpenWeatherMap API endpoint URL with latitude and longitude details
-    $cUrl = 'http://api.openweathermap.org/data/2.5/weather?lat=' . $_POST['latit'] . '&lon=' . $_POST['long'] . '&appid=8db7e55d2af4fc3167aae1d35d5ce14b&units=metric';
+    $cUrl = 'https://api.openweathermap.org/data/3.0/onecall?lat='.$_POST['latit'].'&lon='.$_POST['long'].'&exclude=hourly,minutely&appid=8db7e55d2af4fc3167aae1d35d5ce14b&units=metric';
 
     // Initiate a new curl session
     $ch = curl_init();

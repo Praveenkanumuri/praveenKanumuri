@@ -21,8 +21,11 @@
     <link rel="stylesheet" href="./libs/leaflet/Leaflet.easy/easy-button.css"/>
 
     <!-- Importing Font Awesome icons CSS -->
-    <link rel="stylesheet" href="https://kit.fontawesome.com/9ee51a00b1.css" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="./libs/css/fontawesome.min.css"/>
+    <link rel="stylesheet" href="./libs/css/all.min.css"/>
+    <!-- <link rel="stylesheet" href="./libs/css/solid.min.css"/>
+    <link rel="stylesheet" href="./libs/css/brands.min.css"/>
+    <link rel="stylesheet" href="./libs/css/regular.min.css"/> -->
     <!-- Importing Leaflet Extra Markers plugin CSS -->
     <link rel="stylesheet" href="libs/leaflet/Leaflet.extra/leaflet.extra-markers.min.css">
 
@@ -37,16 +40,12 @@
   <body>
   <!-- The header section -->
     <header id="header">
-        <nav class="navbar" id="navBar">
-          <!-- Placeholder for logo or other header elements -->
-          <h4>&nbsp;</h4>
+          
           <!-- Dropdown for selecting country code -->
-          <div id="selectDropdown">
-              <select class="form-cont" id="countryCode"></select>
-          </div>  
-          <!-- Placeholder for other header elements -->
-          <h4>&nbsp;</h4>
-        </nav>
+          <span id="selectDropdown">
+              <select class="form-select shadow-sm" id="countryCode"></select>
+          </span>  
+    
     </header>
     <!-- Preloader animation while the page loads -->
     <div id="preloader"></div> 
@@ -57,39 +56,38 @@
 
 <!-- A modal dialog for currency conversion -->
   <div class="modal fade" id="currencyModal">
-    <div class="modal-dialog">
-      <div class="modal-content" id="modalContent">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content shadow">
       
        <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title" id="currencyHead"></h4>
-          <button id='close1' type="button" class="close" data-dismiss="modal">&times;</button>
+          <button id='close1' type="button" class="btn-close" data-dismiss="modal"></button>
         </div>
       
         <!-- Modal body -->
         <div class="modal-body" id="currencyBody">
-          <!-- Input form for the amount to convert and the selected currency -->
-          <div class="lineI">
-            <h3 class="info" id="cCCode"></h3>
-            <h4 class="info" id="rightFloat"><input type="text" class="form-control" id="reqAmount" placeholder="Enter a value to convert" required=""></h4>
-          </div>
-          <div class="lineI">
-            <h3 class="info" >&nbsp;</h3>
-            <h3 class="info" id="rightFloat">&nbsp;</h3>
-          </div>
-          <!-- The converted amounts for the currencies GBP, USD, and EUR -->
-          <div class="lineI">
-            <h3 class="info" id="gbpCode">GBP</h3>
-            <h3 class="info" id="rightFloat"><span id='ConvertedAmountGBP'></span></h3>
-          </div>
-          <div class="lineI">
-            <h3 class="info" id="usdCode">USD</h3>
-            <h3 class="info" id="rightFloat"><span id='ConvertedAmountUSD'></span></h3>
-          </div>
-          <div class="lineI">
-            <h3 class="info" id="eurCode">EUR</h3>
-            <h3 class="info" id="rightFloat"><span id='ConvertedAmountEUR'></span></h3>
-          </div>
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th id="cCCode" scope="row"></th>
+                <td id="rightFloat"><input type="text" class="form-control" id="reqAmount" placeholder="Enter a value to convert" required="" value =1></td>
+                
+              </tr>
+              <tr>
+                <th  id="gbpCode" scope="row">GBP</th>
+                <td id='ConvertedAmountGBP'></td>
+              </tr>
+              <tr>
+                <th id="usdCode" scope="row">USD</th>
+                <td id="ConvertedAmountUSD"></td>
+              </tr>
+              <tr>
+                <th id="eurCode" scope="row">EUR</th>
+                <td id="ConvertedAmountEUR"></td>
+              </tr>
+            </tbody>
+          </table>
         </div>     
     
         <!-- Modal footer with a button to initiate the conversion -->
@@ -102,102 +100,157 @@
   </div>
     <!-- Modal for displaying country information -->
 <div class="modal fade" id="informationModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content" id="modalContent">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content shadow">
       <!-- Modal Header -->
       <div class="modal-header">
+        <!-- <h2><span id="flagImg"></span></h2> -->
         <h2 class="modal-title" id="countryName"></h2>
-        <h2><span id="flagImg"></span></h2>
-        <button id="close2" type="button" class="close" data-dismiss="modal">&times;</button>
+        <button id="close2" type="button" class="btn-close" data-dismiss="modal"></button>
       </div>
-
       <!-- Modal body -->
       <div class="modal-body" id="infoBody">
-        <div class="lineI">
-          <h3 class="info">Official Name:</h3>
-          <h3 class="info1" id="officalName"></h3>
-        </div>
-        <div class="lineI">
-          <h3 class="info">Capital:</h3>
-          <h3 class="info1" id="capitalName"></h3>
-        </div>
-        <div class="lineI">
-          <h3 class="info">Continent:</h3>
-          <h3 class="info1" id="continentName"></h3>
-        </div>
-        <div class="lineI">
-          <h3 class="info">Population:</h3>
-          <h3 class="info1" id="population"></h3>
-        </div>
-        <div class="lineI">
-          <h3 class="info">Currency Name:</h3>
-          <h3 class="info1" id="currencyName"></h3>
-        </div>
-        <div class="lineI">
-          <h3 class="info">Currency Code:</h3>
-          <h3 class="info1" id="currencyCode"></h3>
-        </div>
-        <div class="lineI">
-          <h3 class="info">Total Area:</h3>
-          <h3 class="info1" id="area"></h3>
-        </div>
-        <div class="lineI">
-          <h3 class="info">Country Calling Code:</h3>
-          <h3 class="info1" id="callCode"></h3>
-        </div>
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <th scope="row" class="align-middle" >Country Flag</th>
+              <td id="flagImg"></td>
+            </tr>
+            <tr>
+              <th scope="row" >Official Name</th>
+              <td id="officalName"></td>
+            </tr>
+            <tr>
+              <th scope="row">Capital</th>
+              <td id="capitalName"></td>              
+            </tr>
+            <tr>
+              <th scope="row">Continent</th>
+              <td id="continentName"></td>
+            </tr>
+            <tr>
+              <th scope="row">Population</th>
+              <td id="population"></td>
+            </tr>
+            <tr>
+              <th scope="row">Currency Name</th>
+              <td id="currencyName"></td>
+            </tr>
+            <tr>
+              <th scope="row">Currency Code</th>
+              <td id="currencyCode"></td>
+            </tr>
+            <tr>
+              <th scope="row">Total Area</th>
+              <td id="area"></td>
+            </tr>
+            <tr>
+              <th scope="row">Country Calling Code</th>
+              <td id="callCode"></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
 </div>
-  <!-- A modal for displaying weather information -->
-<div class="modal fade" id="weatherModal">
-  <div class="modal-dialog">
-    <div class="modal-content" id="modalContent">
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h2 class="modal-title" id="weatherTitle"></h2>
-        <button id="close3" type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body" id="weatherBod">
-        <h4 id="weatherBo" class="weatherData"></h4>
-        <h4 id="feelsLikeTemp" class="weatherData"></h4>
-        <h4 id="temp" class="weatherData"></h4>
-        <h4 id="humidity" class="weatherData"></h4>
-        <h4 id="pressure" class="weatherData"></h4>
-        <h4 id="windData" class="weatherData"></h4>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End of the Weather Modal -->
   <!-- News Modal -->
 <div class="modal fade" id="newsModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content" id="modalContent">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content shadow">
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title" id="newsTitle"></h4>
-        <button id="close4" type="button" class="close" data-dismiss="modal">&times;</button>
+        <button id="close4" type="button" class="btn-close" data-dismiss="modal"></button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body" id="newsBody"> 
-        <div id="news1Img"><!-- News 1 Image --></div>
-        <div id="news1"><!-- News 1 Title and Description --></div>
-        <div id="news2Img"><!-- News 2 Image --></div>
-        <div id="news2"><!-- News 2 Title and Description --></div>
-        <div id="news3Img"><!-- News 3 Image --></div>
-        <div id="news3"><!-- News 3 Title and Description --></div>
-        <div id="news4Img"><!-- News 4 Image --></div>
-        <div id="news4"><!-- News 4 Title and Description --></div>
-        <div id="news5Img"><!-- News 5 Image --></div>
-        <div id="news5"><!-- News 5 Title and Description --></div>
+        <div class =news id="news1Img"><!-- News 1 Image --></div>
+        <span id="news1"><!-- News 1 Title and Description --></span>
+        <div class =news id="news2Img"><!-- News 2 Image --></div>
+        <span id="news2"><!-- News 2 Title and Description --></span>
+        <div class =news id="news3Img"><!-- News 3 Image --></div>
+        <span id="news3"><!-- News 3 Title and Description --></span>
+        <div class =news id="news4Img"><!-- News 4 Image --></div>
+        <span id="news4"><!-- News 4 Title and Description --></span>
+        <div class =news id="news5Img"><!-- News 5 Image --></div>
+        <span id="news5"><!-- News 5 Title and Description --></span>
       </div>
     </div>
   </div>
 </div>
+
+<!-- a modal for weather  -->
+<div id="weatherModal" class="modal fade" tabindex="-1" data-bs-backdrop="false" data-bs-keyboard="false" aria-labelledby="weatherModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content shadow">      
+      <div class="modal-header">
+        <h5 class="modal-title" id="weatherModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col border m-2">
+            <p class="fw-bold fs-5 mt-3">TODAY</p>
+            <div class="row">
+              <div class="col text-center m-2">
+                <p id="todayConditions" class="fw-bold fs-6"></p>
+              </div>
+              <div class="col text-center">
+                <img id="todayIcon" class="img-fluid mt-0" src="" alt="" title="">
+              </div>              
+              <div class="col text-center">
+                <p class="fw-bold fs-4 mb-0"><span id="todayMaxTemp"></span><sup>o</sup><span class="tempMetric">c</span></p>
+                <p class="fs-5 mt-0 text-secondary"><span id="todayMinTemp"></span><sup>o</sup><span class="tempMetric">c</span></p>
+              </div>              
+            </div>
+          </div>   
+        </div>
+        <div class="row">
+          <div class="col border m-2">
+            <div class="row">
+              <div class="col text-center">
+                <p id="day1Date" class="fw-bold fs-6 mt-3"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-center">
+                <p class="fw-bold fs-4 mb-0"><span id="day1MaxTemp"></span><sup>o</sup>c</p>
+                <p class="fs-5 mt-0 text-secondary"><span id="day1MinTemp"></span><sup>o</sup>c</p>
+              </div>
+              <div class="col text-center">
+                <img id="day1Icon" src="" alt="" title="">
+              </div>    
+            </div>
+          </div>   
+          <div class="col border m-2">
+            <div class="row">
+              <div class="col text-center">
+                <p id="day2Date" class="fw-bold fs-6 mt-3"></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col text-center">
+                <p class="fw-bold fs-4 mb-0"><span id="day2MaxTemp"></span><sup>o</sup>c</p>
+                <p class="fs-5 mt-0 text-secondary"><span id="day2MinTemp"></span><sup>o</sup>c</p>
+              </div>
+              <div class="col text-center">
+                <img id="day2Icon" src="" alt="" title="">
+              </div>    
+            </div>
+          </div>         
+        </div>   
+      </div>
+      <div class="modal-footer">
+        <p class="fs-6 fw-light">Last updated <span id="lastUpdated"></span>. Powered by <a href="https://openweathermap.org/" target="_blank" title="Free Weather API">openweathermap.org</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+  
 
 <!-- Importing jQuery library -->
 <script type="application/javascript" src="libs/js/jquery-2.2.3.min.js"></script>
@@ -208,7 +261,8 @@
 <!-- Importing EasyButton plugin for Leaflet -->
 <script src="./libs/leaflet/Leaflet.easy/easy-button.js"></script>
 <!-- Importing Font Awesome icons -->
-<script src="https://kit.fontawesome.com/9ee51a00b1.js" crossorigin="anonymous"></script>
+<!-- <script src="libs/js/all.min.js"></script>
+<script src="libs/js/fontawesome.min.js"></script> -->
 <!-- Importing Leaflet Extra Markers plugin -->
 <script src="libs/leaflet/Leaflet.extra/leaflet.extra-markers.min.js"></script>
 <!-- Importing Leaflet Marker Cluster plugin -->
