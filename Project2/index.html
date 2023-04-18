@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Directory</title>
+    <link rel="shortcut icon" type="image/png" href="libs/images/favicon.jpg    ">
+    <link rel="stylesheet" href="libs/css/bootstrapcss/bootstrap.min.css">
+    <link rel="stylesheet" href="libs/css/fontawesome.min.css">
+    <link rel="stylesheet" href="libs/css/all.min.css">
+    <link rel="stylesheet" href="libs/css/style.css ">
+    
+
+</head>
+<body>
+
+    <!-- <div id="preloader"></div>  -->
+    <nav id="navContainer">
+        <div id="navbar">
+          <div id="logocontainer">
+            <h2 id="navbarLogo">Company Directory</h2>
+          </div>
+  
+          <div id="menuContainer">
+            <button id="menuButton" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+  
+            <div id="dropdownContainer">
+              <ul>
+                <li id="addEmployeeButton" class="menuOptions">Add Employee</li>
+                <li id="manageDepartment" class="menuOptions">Manage Departments</li>
+                <li id="manageLocation" class="menuOptions">Manage Locations</li>
+              </ul>
+            </div>
+          </div>
+        <div>
+      </nav>
+      <table class="filterTable">
+        <thead class='tableHeader'>
+            <tr id="filterRow" class="sticky-top">
+                <th id="large" class="employee-head employee-col" colspan="2">
+                    <input id="filterName" type="search" class="form-control search-names" aria-label="Search Employee Names" placeholder="Search Employees" autocomplete="off">
+                </th>
+  
+                <th id="medium" class="employee-head employee-col">
+                  <input type="search" class="form-control search-names" aria-label="Search Employee Names" placeholder="Search Employees" autocomplete="off">
+                </th>
+  
+                <th id="small">
+                  <div id="search-container">
+                    <div id="mag-container">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <input type="search" class="form-control search-names" aria-label="Search Employee Names" placeholder="Search Employees" autocomplete="off">
+                  </div>
+                </th>
+  
+              <th class="department-head department-col">
+                <select id="filterDept" class="form-select">
+                  <option id="depaFilter" selected value="reset">Filter Departments</option>
+                </select>
+              </th>
+  
+              <th class="location-head location-col">
+                <select id="filterLoc" class="form-select">
+                  <option selected value="reset">Filter Locations</option>
+                </select>
+              </th>
+  
+              <th class="button-head button-col">
+                <div id="reset" class="button-container">
+                  <button id="resetButton" aria-label="Reset">
+                    <i class="fa-solid fa-rotate-left"></i><span id="hide-small">Reset</span>
+                  </button>
+                </div>
+              </th>
+            </tr>
+        </thead>
+      </table>
+      <table class="employeeTable" >
+        <thead class='tableHeader'>
+            <tr id="headingColumn" class="sticky-bottom">
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Location</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <br>
+        <br>
+        <tbody id="personnelData">
+        </tbody>
+    </table>
+
+<!--New Employee Modal -->
+    <div class="modal fade" id="addEmployee" tabindex="-1" role="dialog" aria-labelledby="newEmployeeLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="newEmployeeLabel">Add New Employee</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input type="text" class="form-control" id="firstName" placeholder="Enter first name" >
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input type="text" class="form-control" id="lastName" placeholder="Enter last name" >
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="departmentLabel">Department</label>
+                    <select class="form-control" id="department" name="employeeDepartment" >
+                        <option value="" selected disabled>Select Department</option>
+                    </select>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="addEmplyeeSubmit">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+<!--View Employee Modal-->
+<div class="modal fade" id="employeeInformation" tabindex="-1" role="dialog" aria-labelledby="viewEmployeeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+                <h5 class="modal-title" id="selectedEmployeeName"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="closeBtn"></button>
+        </div>
+        
+        <div class="modal-body" id="infoBody">
+                <table class="table table-striped">
+                  <tbody>
+                    
+                    <tr>
+                      <th scope="row" >Email</th>
+                      <td id="selectedEmployeeEmail"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Department</th>
+                      <td id="selectedEmployeeDepartment"></td>              
+                    </tr>
+                    <tr>
+                      <th scope="row">Location</th>
+                      <td id="selectedEmployeeLocation"></td>
+                    </tr>
+                  </tbody>
+                </table>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-bs-target="#deleteEmployeeModal" id="deleteEmployeePromt"><i class="fa-solid fa-user-slash"></i></i></button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" id="editEmployeeButton" data-target="#editEmployee"><i class="fa-solid fa-user-pen"></i></button>
+            <button type="button" class="btn btn-secondary modalClose" data-bs-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+<!--Edit Employee Modal-->
+<div class="modal fade" id="editEmployee" role="dialog" aria-labelledby="editEmployeeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Edit Employee</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="closeBtn"></button>
+        </div>
+        <div class="modal-body">
+            <form id="editEmployeeForm">
+                <div class="form-row">
+                <div class="form-group">
+                    <label for="editFirstNameLabel">First Name</label>
+                    <input type="text" class="form-control" id="editFirstName" name="editFirstName">
+                </div>
+                <div class="form-group">
+                    <label for="editLastNameLabel">Last Name</label>
+                    <input type="text" class="form-control" id="editLastName" name="editLastName">
+                </div>
+                </div>
+                <div class="form-group">
+                    <label for="editEmailLabel">Email Address</label>
+                    <input type="email" class="form-control" id="editEmail" name="editEmail">
+                </div>
+                <div class="form-group">
+                    <label for="editDepartmentLabel">Department</label>
+                    <select class="form-control" id="editDepartment" name="editDepartment">
+                        
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" data-toggle="modal">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form> 
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- delete employee modal  -->
+<div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editDepartmentModalLabel">Delete employee</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           <p id="deleteDialog"> </p>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" id="deleteEmployee" class="btn btn-danger">Delete</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Manange department modal  -->
+<div class="modal fade" id="manageDepartmentsModal" tabindex="-1" role="dialog" aria-labelledby="manageDepartmentsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="manageDepartmentsModalLabel">Manage Departments</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- Department table here -->
+          <table class="table table-striped" >
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="depatmentTable">
+              <!-- Department rows here -->
+              <tr>
+                <td>Department 1</td>
+                <td>
+                  <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editDepartmentModal">Edit</button>
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Department 2</td>
+                <td>
+                  <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editDepartmentModal">Edit</button>
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newDepartmentModal" id="addNewDepartment">Add New Department</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- New Department modal -->
+  <div class="modal fade" id="newDepartmentModal" tabindex="-1" role="dialog" aria-labelledby="newDepartmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newDepartmentModalLabel">New Department</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="departmentName">Department Name</label>
+              <input type="text" class="form-control" id="departmentName">
+            </div>
+          </form>
+          <form>
+            <div class="form-group">
+              <label for="departmentName">Location</label>
+             
+              <select class="form-control" id="departmentLocation" name="editDepartmentLocation" required>
+                <option  selected value="reset">Select Location</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="newDepartmentSave">Save</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Edit Department modal -->
+  <div class="modal fade" id="editDepartmentModal" tabindex="-1" role="dialog" aria-labelledby="editDepartmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editDepartmentModalLabel">Edit Department</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="editDepartmentForm">
+            <div class="form-group">
+              <label for="editDepartmentName">Department Name:</label>
+              <input type="text" class="form-control" id="editDepartmentName" name="editDepartmentName" required>
+            </div>
+            <div class="form-group">
+              <label for="editDepartmentLocation">Location:</label>
+              <select class="form-control" id="editDepartmentLocation" name="editDepartmentLocation" required>
+                <option id="depFilter" selected value="reset">Filter Departments</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Manage Location modal -->
+<div class="modal fade" id="manageLocationModal" tabindex="-1" role="dialog" aria-labelledby="manageDepartmentsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="managelocationModalLabel">Manage lcoation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- location table here -->
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- location rows here -->
+              <tr>
+                <td>locaction 1 </td>
+                <td>
+                  <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editDepartmentModal">Edit</button>
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td>location 2</td>
+                <td>
+                  <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editDepartmentModal">Edit</button>
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newLocationModal" id="addNewLocation">Add New location</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- New Location modal -->
+  <div class="modal fade" id="newLocationModal" tabindex="-1" role="dialog" aria-labelledby="newLocationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newLocationModalLabel">New Location</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="locationName">Location Name</label>
+              <input type="text" class="form-control" id="locationName">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="newLocationSave">Save</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Edit location modal -->
+  <div class="modal fade" id="editLocationModal" tabindex="-1" role="dialog" aria-labelledby="editLocationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editDepartmentModalLabel">Edit Department</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="editDepartmentForm">
+            <div class="form-group">
+              <label for="editDepartmentName">Department Name:</label>
+              <input type="text" class="form-control" id="editDepartmentName" name="editDepartmentName" required>
+            </div>
+            <div class="form-group">
+              <label for="editDepartmentLocation">Location:</label>
+              <select class="form-control" id="editDepartmentLocation" name="editDepartmentLocation" required>
+                <option id="depFilter" selected value="reset">Filter Departments</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script type="application/javascript" src="libs/js/jquery-2.2.3.min.js"></script>
+<script type="application/javascript" src="libs/js/bootstrap/bootstrap.min.js"></script>
+<script type="application/javascript" src="libs/js/all.min.js"></script>
+<script type="application/javascript" src="libs/js/app.js"></script>
+    
+</body>
+</html>

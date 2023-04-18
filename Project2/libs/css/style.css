@@ -1,0 +1,136 @@
+#navContainer {
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    background-color:#3AAFA9;
+  }
+  
+  #navbar {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+#navbarLogo{
+  color:#080808;
+}
+  
+  #menuContainer {
+    height: 100%;
+    width:250px;
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  #menuButton {
+    font-size: large;
+    width: 50px;
+    position: absolute;
+    right: 10px;
+    background-color:transparent;
+    border:none;
+  }
+  
+  
+  #menuButton:hover  {
+    background:rgb(239, 239, 244);
+  }
+  
+  
+  #dropdownContainer {
+    width: 250px;
+    position: fixed;
+    top: 50px;
+    right: -250px;
+    z-index: 99;
+    background-color:#3AAFA9;
+    box-shadow: 2px 2px 2px rgba(233, 237, 234, 0.5);
+    cursor: pointer;
+  }
+  
+  #dropdownContainer.visible {
+    position: fixed;
+    right: 0;
+    z-index: 99;
+    transition: all 0.5s ease;
+  }
+ 
+    
+  .menuOptions {
+    padding: 10px 20px;
+    list-style: none;
+    text-align: right;
+    text-transform: uppercase;
+    color: white;
+  }
+  
+  .menuOptions:hover {
+    color: black;
+    background-color: rgb(249, 249, 252);
+  }
+  
+  .menuOptions:active {
+    color: black;
+    background-color:#3AAFA9;
+  }
+
+  .employeeTable, .filterTable {
+    width: 100%;
+   
+  }
+  
+  .employeeTable th,
+  .filterTable th,
+  .employeeTable td {
+    padding: 10px;
+    text-align: left;
+    border: 0px solid #ddd;
+  }
+  
+ 
+  #medium,
+  #small {
+    display: none;
+  }
+  #filterRow{
+    position:sticky;
+    top: 90px;
+    z-index: 3;
+    background-color:#7aeae4;
+  } 
+  #filterSection {
+    
+    padding: 20px;
+    background-color: #7aeae4;
+  }
+  #headingColumn {
+    margin-top: 50px;
+    position: sticky;
+    top: 100px;
+    z-index: 33;
+    background-color:#7aeae4;
+  }
+  .filterTable {
+    position: sticky;
+    top: 50px;
+    z-index: 333;
+    background-color: #7aeae4;
+  }
+  #personnelData {
+    position:sticky;
+    z-index: 3;
+ 
+    overflow-y: scroll;
+   
+    padding-top: 150px;
+  }
+
+  
+ 
