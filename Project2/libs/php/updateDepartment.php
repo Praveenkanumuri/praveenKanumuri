@@ -41,11 +41,18 @@ $departmentId = $_POST['departmentId'];
 $departmentName = $_POST['departmentName'];
 $departmentLocation = $_POST['departmentLocation'];
 
-// Construct query to update department name and location
-$query =  "UPDATE department SET name='$departmentName', locationId='$departmentLocation' WHERE id='$departmentId'";
+// Prepare query with placeholders
+$query = "UPDATE department SET name=?, locationId=? WHERE id=?";
 
-// Execute query
-$result = $conn->query($query);
+// Prepare statement
+$stmt = $conn->prepare($query);
+
+// Bind parameters
+$stmt->bind_param("ssi", $departmentName, $departmentLocation, $departmentId);
+
+// Execute statement
+$result = $stmt->execute();
+
 
 // Check if query was successful
 if (!$result) {

@@ -30,8 +30,10 @@
 	}	
 
 	$query = 'SELECT id, name FROM location';
-
-	$result = $conn->query($query);
+	$stmt = $conn->prepare($query);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	
 	
 	if (!$result) {
 

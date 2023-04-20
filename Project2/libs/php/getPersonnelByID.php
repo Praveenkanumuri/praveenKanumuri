@@ -34,9 +34,12 @@
 
 	// first query
 
-	$query = 'SELECT id, firstName, lastName, jobTitle, email, departmentID from personnel WHERE id =' . $_POST['id'];
-
-	$result = $conn->query($query);
+	$query = 'SELECT id, firstName, lastName, jobTitle, email, departmentID FROM personnel WHERE id = ?';
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("i", $_POST['id']);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	
 	
 	if (!$result) {
 
@@ -63,9 +66,11 @@
 
 	// second query
 
-	$query = 'SELECT id, name from department ORDER BY id';
+	$query = 'SELECT id, name FROM department ORDER BY id';
+	$stmt = $conn->prepare($query);
+	$stmt->execute();
+	$result = $stmt->get_result();
 
-	$result = $conn->query($query);
 	
 	if (!$result) {
 

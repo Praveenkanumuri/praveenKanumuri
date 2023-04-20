@@ -35,15 +35,21 @@ if (mysqli_connect_errno()) {
 
 }   
 
-// Retrieve location ID and name from POST request
 $locationId = $_POST['id'];
 $locationName = $_POST['locationName'];
 
-// Construct query to update location name
-$query =  "UPDATE location SET name='$locationName' WHERE id='$locationId'";
+// Prepare query with placeholders
+$query = "UPDATE location SET name = ? WHERE id = ?";
+$stmt = $conn->prepare($query);
 
-// Execute query
-$result = $conn->query($query);
+// Bind parameters
+$stmt->bind_param("si", $locationName, $locationId);
+
+// Execute statement
+$result = $stmt->execute();
+
+
+
 
 // Check if query was successful
 if (!$result) {

@@ -26,12 +26,14 @@
 		exit;
 
 	}	
-
-	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
-
-	$query = 'INSERT INTO department (name, locationID) VALUES("' . $_POST["name"] . '",' . $_POST["locationID"] . ')';
-
-	$result = $conn->query($query);
+	$name = $_POST["name"];
+	$locationID = $_POST["locationID"];
+	
+	$query = 'INSERT INTO department (name, locationID) VALUES (?, ?)';
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("si", $name, $locationID);
+	$result = $stmt->execute();
+	
 	
 	if (!$result) {
 

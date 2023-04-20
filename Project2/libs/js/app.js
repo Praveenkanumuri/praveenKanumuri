@@ -64,7 +64,7 @@ function filterRows() {
     }
 
     // Check Department filter
-    var dept = rows[i].getElementsByTagName("td")[2];
+    var dept = rows[i].getElementsByTagName("td")[3];
     if (filters.filterDept !== "" && dept) {
       var deptValue = dept.textContent || dept.innerText;
       if (deptValue !== filters.filterDept) {
@@ -73,7 +73,7 @@ function filterRows() {
     }
 
     // Check Location filter
-    var loc = rows[i].getElementsByTagName("td")[3];
+    var loc = rows[i].getElementsByTagName("td")[4];
     if (filters.filterLoc !== "" && loc) {
       var locValue = loc.textContent || loc.innerText;
       if (locValue !== filters.filterLoc) {
@@ -90,7 +90,7 @@ function filterRows() {
   }
 }
 
-  
+
 
 
 $('#editEmployeeButton').on('click', function() {
@@ -181,7 +181,15 @@ function locations() {
       });
       
 };
-$(document).ready(function() {
+$(document).ready(function() { 
+    updateTable();
+});
+
+function updateTable() {
+
+    $('#personnelData').empty();
+    $('#departmentData').empty();
+    $('#locationData').empty();
 
     $.ajax({
         url: "libs/php/getAll.php",
@@ -198,11 +206,13 @@ $(document).ready(function() {
                     const employeeEmailId = `${i}-employeeEmail`;
                     const employeeDeptId = `${i}-employeeDepartment`;
                     const employeeLocId = `${i}-employeeLocation`;
+                    const employeeJobTitleId = `${i}-employeeJobTitle`;
                     const employeeId = `${i}-id`;
     
                     const employeeRow = `<tr>
                                             <td id="${employeeNameId}">${fullName}</td>
                                             <td class="style2" id="${employeeEmailId}">${employee.email}</td>
+                                            <td class="style2" id="${employeeJobTitleId}">${employee.jobTitle}</td>
                                             <td class="style3" id="${employeeDeptId}" class="depFilter">${employee.department}</td>
                                             <td class="style4" id="${employeeLocId}">${employee.location}</td>
                                             <td>
@@ -305,7 +315,7 @@ $(document).ready(function() {
         }
       });
 
-});
+};
     
     
 function fillEditForm(employeeNum) {
@@ -313,11 +323,13 @@ function fillEditForm(employeeNum) {
     currentId = $(`#${numToString}-id`).html();
      employeeName = $(`#${numToString}-employeeName`).html();
     const employeeEmail = $(`#${numToString}-employeeEmail`).html();
+    const employeeJobTitle =  $(`#${numToString}-employeeJobTitle`).html();
     const employeeDepartment = $(`#${numToString}-employeeDepartment`).html();
     const employeeLocation = $(`#${numToString}-employeeLocation`).html();
 
     $('#selectedEmployeeName').html(employeeName);
     $('#selectedEmployeeEmail').html(employeeEmail);
+    $('#selectedEmployeeJob').html(employeeJobTitle);
     $('#selectedEmployeeDepartment').html(employeeDepartment);
     $('#selectedEmployeeLocation').html(employeeLocation);
 };
@@ -349,6 +361,7 @@ function fillEditFormLoc(locationNum) {
 $('#editEmployeeButton').on('click', function() {
 
     // console.log(currentId);
+    
 
     $.ajax({
         url: "libs/php/getPersonnelByID.php",
@@ -368,6 +381,7 @@ $('#editEmployeeButton').on('click', function() {
             var personnel = result.data.personnel[0];
             $('#editFirstName').val(personnel.firstName);
             $('#editLastName').val(personnel.lastName);
+            $('#editJob').val(personnel.jobTitle);
             $('#editEmail').val(personnel.email);
             $('#editDepartment').val(personnel.departmentID);
         }
@@ -381,7 +395,7 @@ $('#editEmployeeButton').on('click', function() {
 departments();
 locations();
 $('#editEmployeeForm').submit(function() {
-
+    event.preventDefault();
     $.ajax({
         url: "libs/php/updateEmployee.php",
         type: "POST",
@@ -391,11 +405,14 @@ $('#editEmployeeForm').submit(function() {
             firstName: $('#editFirstName').val(),
             lastName: $('#editLastName').val(),
             email: $('#editEmail').val(),
-            departmentID: $('#editDepartment').val()
+            departmentID: $('#editDepartment').val(),
+            jobTitle:$('#editJob').val()
         },
         success: function(result) {
             if (result.status.name == "ok") {
-                location.reload(true);
+                updateTable();
+                alert('The employee information has been updated successfully.');
+                // location.reload(true);
             };
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -410,6 +427,7 @@ $('#editEmployeeForm').submit(function() {
 $('#editDepartmentForm').submit(function() {
 //    console.log($('#editDepartmentName').val());
 //     console.log($('#editDepartmentLocation').val());
+event.preventDefault();
     $.ajax({
         url: 'libs/php/updateDepartment.php',
         type: 'POST',
@@ -423,8 +441,9 @@ $('#editDepartmentForm').submit(function() {
 
           // Handle success response
         //   console.log(response);
+         updateTable();
           alert('Department updated successfully!');
-          location.reload(true);
+          
         },
         error: function(xhr, status, error) {
           // Handle error response
@@ -437,6 +456,7 @@ $('#editDepartmentForm').submit(function() {
 $('#editLoactionForm').submit( function() {
     // console.log($('#editLocationName').val());
     // console.log(locationId);
+    event.preventDefault();
     $.ajax({
         url: 'libs/php/updateLocation.php',
         type: 'POST',
@@ -448,6 +468,9 @@ $('#editLoactionForm').submit( function() {
         success: function(response) {
             // Handle success response
             // console.log(response);
+            updateTable();
+           
+
             alert('Location updated successfully!');
             // location.reload(true);
         },
@@ -475,8 +498,8 @@ $('#deleteEmployee').on('click', function() {
         success: function(result) {
 
             if (result.status.name == "ok") {
-
-                location.reload(true);
+                updateTable();
+                // location.reload(true);
 
             }
 
@@ -491,7 +514,7 @@ $('#deleteEmployee').on('click', function() {
 });
 
 $('#addEmployeeForm').submit(function() { 
-
+    event.preventDefault();
     $.ajax({
         url: "libs/php/addEmployee.php",
         type: "POST",
@@ -499,13 +522,16 @@ $('#addEmployeeForm').submit(function() {
         data: {
             firstName: $('#firstName').val(),
             lastName: $('#lastName').val(),
+            jobTitle: $('#newJobTitle').val(),
             email: $('#email').val(),
             departmentID: $('#department').val()
         },
     
         success: function(result) {
             if (result.status.name == "ok") {
-                location.reload(true);
+                updateTable();
+                // location.reload(true);
+                alert('A new employee has been added.');
             }
         },
     
@@ -518,7 +544,7 @@ $('#addEmployeeForm').submit(function() {
     
 });
 $('#newDepartmentForm').submit( function() {
-
+    event.preventDefault();
     $.ajax({
         url: "libs/php/addDepartment.php",
         type: "POST",
@@ -530,7 +556,9 @@ $('#newDepartmentForm').submit( function() {
     
         success: function(result) {
             if (result.status.name == "ok") {
-                location.reload(true);
+                updateTable();
+                // location.reload(true);
+                alert('A new department has been added.');
             }
         },
     
@@ -544,7 +572,7 @@ $('#newDepartmentForm').submit( function() {
 });
 
 $('#addNewLocationForm').submit(function() {
-
+    event.preventDefault();
     $.ajax({
         url: "libs/php/addLocation.php",
         type: "POST",
@@ -558,8 +586,9 @@ $('#addNewLocationForm').submit(function() {
             if (result.status.name == "ok") {
     
                 // console.log(result);
+                updateTable();
+                alert('A new location has been added.');
                 
-                location.reload(true);
             }
     
         },
@@ -602,7 +631,7 @@ $('#deleteDepConfirmation').on('click' ,function() {
                                 if (result.status.name == "ok") {
                                     $('#deleteDepartmentConfrimationModal').modal('show');
                                     // location.reload(true);
-                    
+                                    updateTable();
                                 }
                     
                             },
@@ -656,7 +685,7 @@ $('#deleteDepConfirmation').on('click' ,function() {
                     
                                 if (result.status.name == "ok") {
                                     $('#deleteLocationConfirmationModal').modal('show');
-                                    
+                                    updateTable();
                                     // location.reload(true);
                     
                                 }

@@ -29,7 +29,10 @@
 
     $query = 'SELECT d.id AS department_id, d.name AS department_name, l.name AS location_name FROM department d JOIN location l ON d.locationID = l.id';
 
-    $result = $conn->query($query);
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
     
     if (!$result) {
 

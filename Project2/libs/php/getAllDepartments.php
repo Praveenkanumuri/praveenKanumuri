@@ -33,8 +33,10 @@
 	
 
 	$query = 'SELECT id, name, locationID FROM department';
-
-	$result = $conn->query($query);
+	$stmt = $conn->prepare($query);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	
 	
 	if (!$result) {
 

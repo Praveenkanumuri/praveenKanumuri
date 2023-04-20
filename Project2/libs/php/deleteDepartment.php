@@ -28,9 +28,11 @@
 
 	}	
 
-	$query = 'DELETE FROM department WHERE id = ' . $_POST['departmentID'];
-
-	$result = $conn->query($query);
+	$query = 'DELETE FROM department WHERE id = ?';
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param('i', $_POST['departmentID']);
+	$result = $stmt->execute();
+	
 	
 	if (!$result) {
 

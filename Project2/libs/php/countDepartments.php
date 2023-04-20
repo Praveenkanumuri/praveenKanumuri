@@ -38,10 +38,13 @@ if (mysqli_connect_errno()) {
 
 $id = $_POST['id'];
 
-$query ='SELECT COUNT(id) FROM `department` WHERE `locationID` =' . $id;
+$query = 'SELECT COUNT(id) FROM department WHERE locationID = ?';
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-// Execute query
-$result = $conn->query($query);
+
 
 // Check if query was successful
 if (!$result) {

@@ -37,11 +37,11 @@ if (mysqli_connect_errno()) {
 }
 
 $id = $_POST['id'];
-
-$query ='SELECT COUNT(id) FROM `personnel` WHERE `departmentID` =' . $id;
-
-// Execute query
-$result = $conn->query($query);
+$query = 'SELECT COUNT(id) FROM personnel WHERE departmentID = ?';
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
 
 // Check if query was successful
 if (!$result) {

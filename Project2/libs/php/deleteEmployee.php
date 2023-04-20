@@ -29,9 +29,11 @@
 
 	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
 
-	$query = "DELETE FROM personnel WHERE id = '" . $_POST['id'] . "'";
-
-	$result = $conn->query($query);
+	$query = "DELETE FROM personnel WHERE id = ?";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("i", $_POST['id']);
+	$result = $stmt->execute();
+	
 	
 	if (!$result) {
 

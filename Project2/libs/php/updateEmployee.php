@@ -21,11 +21,26 @@
         exit;
     }
 
-    $query = 'UPDATE personnel SET firstName = ?, lastName = ?, email = ?, departmentID = ? WHERE id = ?';
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $email = $_POST['email'];
+    $departmentID = $_POST['departmentID'];
+    $jobTitle = $_POST['jobTitle'];
+    $id = $_POST['id'];
+    
+    // Prepare query with placeholders
+    $query = 'UPDATE personnel SET firstName = ?, lastName = ?, email = ?, departmentID = ?, jobTitle = ? WHERE id = ?';
     $stmt = $conn->prepare($query);
-    $stmt->bind_param("ssssi", $_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['departmentID'], $_POST['id']);
+    
+    // Bind parameters
+    $stmt->bind_param("sssssi", $firstName, $lastName, $email, $departmentID, $jobTitle, $id);
+    
+    // Execute statement
     $result = $stmt->execute();
-
+    
+  
+    
+    
     if (!$result) {
         $output['status']['code'] = "400";
         $output['status']['name'] = "executed";

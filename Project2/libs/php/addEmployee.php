@@ -27,11 +27,13 @@
 
 	}	
 
-	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
+		// Sanitized version using prepared statements
 
-	$query = 'INSERT INTO personnel (firstName, lastName, email, departmentID) VALUES("' . $_POST['firstName'] . '", "' . $_POST["lastName"] . '", "' . $_POST["email"] . '", ' . $_POST["departmentID"] . ')';
+		$query = 'INSERT INTO personnel (firstName, lastName, jobTitle, email, departmentID) VALUES (?, ?, ?, ?, ?)';
+		$stmt = $conn->prepare($query);
+		$stmt->bind_param("ssssi", $_POST['firstName'], $_POST['lastName'], $_POST['jobTitle'], $_POST['email'], $_POST['departmentID']);
+		$result = $stmt->execute();
 
-	$result = $conn->query($query);
 	
 	if (!$result) {
 

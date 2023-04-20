@@ -37,10 +37,12 @@
     }   
 
     // Construct query to retrieve location name and id
-    $query =  'SELECT id, name FROM location';
+    $query = 'SELECT id, name FROM location';
 
-    // Execute query
-    $result = $conn->query($query);
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
     
     // Check if query was successful
     if (!$result) {

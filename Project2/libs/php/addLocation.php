@@ -27,11 +27,12 @@
 
 	}	
 
-	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
 
-	$query = 'INSERT INTO location (name) VALUES("' . $_POST["name"] . '")';
-
-	$result = $conn->query($query);
+	$query = "INSERT INTO location (name) VALUES(?)";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("s", $_POST["name"]);
+	$result = $stmt->execute();
+	
 	
 	if (!$result) {
 

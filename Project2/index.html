@@ -88,6 +88,7 @@
               <tr id="headingColumn" class="sticky-bottom">
                   <th>Name</th>
                   <th class="style2">Email</th>
+                  <th class="style2">Job role</th>
                   <th class="style3">Department</th>
                   <th class="style4">Location</th>
                   <th>Action</th>
@@ -175,6 +176,10 @@
             <input type="text" class="form-control" id="lastName" placeholder="Enter last name" required>
           </div>
           <div class="form-group">
+            <label for="JobTitle">Job Title</label>
+            <input type="text" class="form-control" id="newJobTitle" placeholder="Enter Job Title" required>
+          </div>
+          <div class="form-group">
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" placeholder="Enter email" required>
           </div>
@@ -188,7 +193,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel Changes</button>
-        <button type="submit" form="addEmployeeForm" class="btn btn-primary" id="addEmployeeSubmit">Add Employee</button>
+        <button type="submit" form="addEmployeeForm" data-bs-dismiss="modal" class="btn btn-primary" id="addEmployeeSubmit">Add Employee</button>
       </div>
     </div>
   </div>
@@ -217,6 +222,10 @@
                       <td id="selectedEmployeeEmail"></td>
                     </tr>
                     <tr>
+                      <th scope="row" >Job role</th>
+                      <td id="selectedEmployeeJob"></td>
+                    </tr>
+                    <tr>
                       <th scope="row">Department</th>
                       <td id="selectedEmployeeDepartment"></td>              
                     </tr>
@@ -228,8 +237,8 @@
                 </table>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-bs-target="#deleteEmployeeModal" id="deleteEmployeePromt"><i class="fa-solid fa-user-slash"></i></i></button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" id="editEmployeeButton" data-target="#editEmployee"><i class="fa-solid fa-user-pen"></i></button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-bs-dismiss="modal"  id="deleteEmployeePromt"><i class="fa-solid fa-user-slash"></i></i></button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-bs-dismiss="modal" id="editEmployeeButton" data-target="#editEmployee"><i class="fa-solid fa-user-pen"></i></button>
             <button type="button" class="btn btn-secondary modalClose" data-bs-dismiss="modal">Close</button>
         </div>
         </div>
@@ -256,6 +265,10 @@
                 </div>
                 </div>
                 <div class="form-group">
+                  <label for="editJobLabel">Job Title</label>
+                  <input type="text" class="form-control" id="editJob" name="editJobTitle" required>
+              </div>
+                <div class="form-group">
                     <label for="editEmailLabel">Email Address</label>
                     <input type="email" class="form-control" id="editEmail" name="editEmail" required>
                 </div>
@@ -266,7 +279,7 @@
                     </select>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" data-toggle="modal">Submit Changes</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" data-toggle="modal">Submit Changes</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form> 
@@ -287,7 +300,7 @@
            <p id="deleteDialog"> </p>
             </div>
             <div class="modal-footer">
-              <button type="submit" id="deleteEmployee" class="btn btn-danger">Delete Employee</button>
+              <button type="button" id="deleteEmployee" data-bs-dismiss="modal" class="btn btn-danger">Delete Employee</button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
             </div>
         </div>
@@ -319,7 +332,7 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" id="newDepartmentSave">Add New Department</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="newDepartmentSave">Add New Department</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
       </form>
@@ -348,7 +361,7 @@
               </select>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" id="updateDepartment">Submit Changes</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="updateDepartment">Submit Changes</button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
           </form>
@@ -375,7 +388,7 @@
           
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" id="newLocationSave">Add Location</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="newLocationSave">Add Location</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </form>
@@ -398,7 +411,7 @@
               <input type="text" class="form-control" id="editLocationName" name="editDepartmentName" required>
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-primary" id="updateLocation">Submit Changes</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="updateLocation">Submit Changes</button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
           </form>
@@ -520,6 +533,8 @@
       </div>
   </div>
 </div>
+
+
 
 
 <script type="application/javascript" src="libs/js/jquery-2.2.3.min.js"></script>
