@@ -183,6 +183,8 @@ function locations() {
 };
 $(document).ready(function() { 
     updateTable();
+    departments();
+    locations();
 });
 
 function updateTable() {
@@ -190,7 +192,13 @@ function updateTable() {
     $('#personnelData').empty();
     $('#departmentData').empty();
     $('#locationData').empty();
-
+    $('#filterDept').empty();
+    $('#department').empty();
+    $('#newDepartmentLocation').empty();
+    $('#filterLoc').empty();
+    $('#departmentLocation').empty();
+    departments();
+    locations();
     $.ajax({
         url: "libs/php/getAll.php",
         type: "GET",
@@ -392,8 +400,7 @@ $('#editEmployeeButton').on('click', function() {
         console.log(jqXHR);
     });
 });
-departments();
-locations();
+
 $('#editEmployeeForm').submit(function() {
     event.preventDefault();
     $.ajax({
@@ -411,8 +418,12 @@ $('#editEmployeeForm').submit(function() {
         success: function(result) {
             if (result.status.name == "ok") {
                 updateTable();
-                alert('The employee information has been updated successfully.');
-                // location.reload(true);
+                $('#alert.modal-body').html('');
+                $('#alert .modal-body').html('The employee information has been updated successfully.');
+                $('#alert').modal('show');
+                setTimeout(function(){
+                    $('#alert').modal('hide');
+                }, 4000);
             };
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -442,7 +453,13 @@ event.preventDefault();
           // Handle success response
         //   console.log(response);
          updateTable();
-          alert('Department updated successfully!');
+        
+         $('#alert.modal-body').html('');
+        $('#alert .modal-body').html('Department has been updated successfully.');
+        $('#alert').modal('show');
+        setTimeout(function(){
+            $('#alert').modal('hide');
+        }, 4000);
           
         },
         error: function(xhr, status, error) {
@@ -469,10 +486,13 @@ $('#editLoactionForm').submit( function() {
             // Handle success response
             // console.log(response);
             updateTable();
+            $('#alert.modal-body').html('');
+                $('#alert .modal-body').html('Location updated successfully!');
+                $('#alert').modal('show');
+                setTimeout(function(){
+                    $('#alert').modal('hide');
+                }, 4000);
            
-
-            alert('Location updated successfully!');
-            // location.reload(true);
         },
         error: function(xhr, status, error) {
             // Handle error response
@@ -531,7 +551,13 @@ $('#addEmployeeForm').submit(function() {
             if (result.status.name == "ok") {
                 updateTable();
                 // location.reload(true);
-                alert('A new employee has been added.');
+                
+                $('#alert.modal-body').html('');
+                $('#alert .modal-body').html('New Employee added successfully.');
+                $('#alert').modal('show');
+                setTimeout(function(){
+                    $('#alert').modal('hide');
+                }, 4000);
             }
         },
     
@@ -558,7 +584,13 @@ $('#newDepartmentForm').submit( function() {
             if (result.status.name == "ok") {
                 updateTable();
                 // location.reload(true);
-                alert('A new department has been added.');
+                // alert('A new department has been added.');
+                $('#alert.modal-body').html('');
+                $('#alert .modal-body').html('A new department has been added.');
+                $('#alert').modal('show');
+                setTimeout(function(){
+                    $('#alert').modal('hide');
+                }, 4000);
             }
         },
     
@@ -587,7 +619,13 @@ $('#addNewLocationForm').submit(function() {
     
                 // console.log(result);
                 updateTable();
-                alert('A new location has been added.');
+                // alert('A new location has been added.');
+                $('#alert.modal-body').html('');
+                $('#alert .modal-body').html('A new location has been added.');
+                $('#alert').modal('show');
+                setTimeout(function(){
+                    $('#alert').modal('hide');
+                }, 4000);
                 
             }
     
@@ -617,7 +655,7 @@ $('#deleteDepConfirmation').on('click' ,function() {
                         // console.log(entries);
                         $('#employeeCount').html(entries);
                         if(result['data']['0']['COUNT(id)'] == 0) {
-                           console.log("department have no employees")
+                        //    console.log("department have no employees")
                            $.ajax({
                             url: "libs/php/deleteDepartment.php",
                             type: "POST",
