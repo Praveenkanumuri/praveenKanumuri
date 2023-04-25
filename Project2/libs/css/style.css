@@ -52,7 +52,7 @@
    /* styles for mobile browsers smaller than 480px; (iPhone) */
   
    #navContainer {
-    height: 50px;
+    height: 53px;
     width: 100%;
     position: fixed;
     top: 0;
@@ -162,32 +162,35 @@
 
   #filterRow{
     position:sticky;
-    top: 90px;
+    top: 100px;
     z-index: 3;
+    border-right: hidden;
     background-color:#7aeae4;
   } 
   #filterSection {
-    
+    border-right: hidden;
     padding: 20px;
     background-color: #7aeae4;
   }
   #headingColumn {
     margin-top: 50px;
     position: sticky;
-    top: 100px;
+    border-right: hidden;
+    top: 107px;
     z-index: 33;
     background-color:#7aeae4;
   }
   .filterTable {
     position: sticky;
     top: 50px;
+   border-right: hidden;
     z-index: 333;
     background-color: #7aeae4;
   }
   #personnelData {
     position:sticky;
     z-index: 3;
- 
+    border-right: hidden;
     overflow-y: scroll;
    
     padding-top: 150px;
@@ -215,7 +218,7 @@
   }
 @media only screen and (min-device-width:524px) and (max-device-width: 769px) {
   #navContainer {
-    height: 50px;
+    height: 53px;
     width: 100%;
     position: fixed;
     top: 0;
@@ -326,32 +329,35 @@
  
   #filterRow{
     position:sticky;
-    top: 90px;
+    top: 100px;
     z-index: 3;
+    border-right: hidden;
     background-color:#7aeae4;
   } 
   #filterSection {
-    
+    border-right: hidden;
     padding: 20px;
     background-color: #7aeae4;
   }
   #headingColumn {
     margin-top: 50px;
     position: sticky;
-    top: 100px;
+    border-right: hidden;
+    top: 105px;
     z-index: 33;
     background-color:#7aeae4;
   }
   .filterTable {
     position: sticky;
-    top: 50px;
+    top: 53px;
+   border-right: hidden;
     z-index: 333;
     background-color: #7aeae4;
   }
   #personnelData {
     position:sticky;
     z-index: 3;
- 
+    border-right: hidden;
     overflow-y: scroll;
    
     padding-top: 150px;
@@ -384,7 +390,7 @@
 
   /* styles for browsers larger than 960px; */
   #navContainer {
-    height: 50px;
+    height: 53px;
     width: 100%;
     position: fixed;
     top: 0;
@@ -492,33 +498,36 @@
 
   #filterRow{
     position:sticky;
-    top: 90px;
+    top: 100px;
     z-index: 3;
-    
+    border-right: hidden;
     background-color:#7aeae4;
   } 
   #filterSection {
-    
+    border-right: hidden;
     padding: 20px;
     background-color: #7aeae4;
   }
   #headingColumn {
+    width:100%;
     margin-top: 50px;
     position: sticky;
-    top: 100px;
+    border-right: hidden;
+    top: 105px;
     z-index: 33;
     background-color:#7aeae4;
   }
   .filterTable {
     position: sticky;
-    top: 50px;
+    top: 53px;
+   border-right: hidden;
     z-index: 333;
     background-color: #7aeae4;
   }
   #personnelData {
     position:sticky;
     z-index: 3;
- 
+    border-right: hidden;
     overflow-y: scroll;
    
     padding-top: 150px;
@@ -540,4 +549,8 @@
     float:right;
     font-size: large;
   }
+}
+.right {
+  
+  text-align: right;
 }
