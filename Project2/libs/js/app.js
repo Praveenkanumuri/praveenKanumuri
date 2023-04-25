@@ -93,23 +93,7 @@ function filterRows() {
 
 
 
-// $('#editEmployeeButton').on('click', function() {
-//     $('#editEmployee').modal('show');
-// })
-$('#addEmployeeButton').on('click', function() {
-    $('#addEmployeeModal').modal('show');
-})
-$('#deleteEmployeePromt').on('click', function() {
-    $('#deleteDialog').html(`Are you sure you want to delete ${employeeName}?`);
-    $('#deleteEmployeeModal').modal('show');
-})
-$('#addNewDepartment').on('click', function() {
-   
-    $('#newDepartmentModal').modal('show');
-})
-$('#addNewLocation').on('click', function() {
-    $('#newLocationModal').modal('show');
-})
+
 $('#resetButton').on('click', function() {
     location.reload(true);
 })
