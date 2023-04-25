@@ -1,0 +1,551 @@
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background: #000;
+  opacity: 0.5;
+}
+
+#preloader:before {
+  content: "";
+  position: fixed;
+  top: calc(50% - 30px);
+  left: calc(50% - 30px);
+  border: 6px solid #f2f2f2;
+  border-top: 6px solid #56829e;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: animate-preloader 1s linear infinite;
+  animation: animate-preloader 1s linear infinite;
+}
+
+@-webkit-keyframes animate-preloader {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animate-preloader {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-device-width: 523px) {
+   /* styles for mobile browsers smaller than 480px; (iPhone) */
+  
+   #navContainer {
+    height: 53px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    background-color:#3AAFA9;
+  }
+  
+  #navbar {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+#navbarLogo{
+  color:#080808;
+  font-size: 1.25em;
+}
+  
+  #menuContainer {
+    height: 100%;
+    width:250px;
+    position: absolute;
+    right: 0;
+    padding:1em;
+    /* align-items: center; */
+  }
+ 
+  .menuTabs button {
+    color:#080808;
+    display:none;
+     
+  }
+  
+  #menuButton {
+    font-size: large;
+    width: 50px;
+    position: absolute;
+    right: 10px;
+    background-color:transparent;
+    border:none;
+  }
+  
+  
+  #menuOptions:hover  {
+    background:rgb(239, 239, 244);
+  }
+  
+  
+  #dropdownContainer {
+    width: 250px;
+    position: fixed;
+    top: 50px;
+    
+    right: -250px;
+    z-index: 99;
+    background-color:#3AAFA9;
+    box-shadow: 2px 2px 2px rgba(233, 237, 234, 0.5);
+    cursor: pointer;
+    
+  }
+  
+  #dropdownContainer.visible {
+    position: fixed;
+    right: 0;
+    z-index: 99;
+    transition: all 0.5s ease;
+    
+  }
+ 
+    
+  .menuOptions {
+    padding: 20px 20px ;
+    list-style: none;
+    text-align: right;
+    text-transform: uppercase;
+    color: white;
+    display:block
+  }
+  
+  .menuOptions:hover {
+    color: black;
+    background-color: rgb(249, 249, 252);
+  }
+  
+  .menuOptions:active {
+    color: black;
+    background-color:#3AAFA9;
+  }
+
+  .employeeTable, .filterTable {
+    width: 100%;
+   
+  }
+  
+  .employeeTable th,
+  .filterTable th,
+  .employeeTable td {
+    padding: 10px;
+    text-align: left;
+    border: 0px solid #ddd;
+  }
+  
+ 
+
+  #filterRow{
+    position:sticky;
+    top: 100px;
+    z-index: 3;
+    border-right: hidden;
+    background-color:#7aeae4;
+  } 
+  #filterSection {
+    border-right: hidden;
+    padding: 20px;
+    background-color: #7aeae4;
+  }
+  #headingColumn {
+    margin-top: 50px;
+    position: sticky;
+    border-right: hidden;
+    top: 107px;
+    z-index: 33;
+    background-color:#7aeae4;
+  }
+  .filterTable {
+    position: sticky;
+    top: 50px;
+   border-right: hidden;
+    z-index: 333;
+    background-color: #7aeae4;
+  }
+  #personnelData {
+    position:sticky;
+    z-index: 3;
+    border-right: hidden;
+    overflow-y: scroll;
+   
+    padding-top: 150px;
+  }
+  #headingColumnDep {
+    margin-top: 50px;
+    position: relative;
+    top: 100px;
+    z-index: 33;
+    background-color:#7aeae4;
+  }
+  #depatmentRow{
+    position:relative;
+    top: 90px;
+    z-index: 3;
+    background-color:#7aeae4;
+  }
+  .align-right {
+    float:right;
+    font-size: large;
+  }
+   .style2, .style3, .style4  {
+    display:none;
+  }
+  }
+@media only screen and (min-device-width:524px) and (max-device-width: 769px) {
+  #navContainer {
+    height: 53px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    background-color:#3AAFA9;
+  }
+  
+  #navbar {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+#navbarLogo{
+  color:#080808;
+  font-size: 1.5em;
+
+}
+  
+  #menuContainer {
+    height: 100%;
+    width:250px;
+    position: absolute;
+    right: 0;
+    display:none;
+    
+    align-items: center;
+  }
+  .menuTabs button {
+    color:#080808;
+    display:block;
+     
+  }
+  
+  #menuButton {
+    font-size: large;
+    width: 50px;
+    position: absolute;
+    right: 10px;
+    background-color:transparent;
+    border:none;
+  }
+  
+  
+  #menuButton:hover  {
+    background:rgb(239, 239, 244);
+  }
+  
+  
+  #dropdownContainer {
+    width: 250px;
+    position: fixed;
+    top: 50px;
+    
+    right: -250px;
+    z-index: 99;
+    background-color:#3AAFA9;
+    box-shadow: 2px 2px 2px rgba(233, 237, 234, 0.5);
+    cursor: pointer;
+    
+  }
+  
+  #dropdownContainer.visible {
+    position: fixed;
+    right: 0;
+    z-index: 99;
+    transition: all 0.5s ease;
+    
+  }
+ 
+    
+  .menuOptions {
+    padding: 20px 20px ;
+    list-style: none;
+    text-align: right;
+    text-transform: uppercase;
+    color: white;
+    display:inline-block
+  }
+  
+  .menuOptions:hover {
+    color: black;
+    background-color: rgb(249, 249, 252);
+  }
+  
+  .menuOptions:active {
+    color: black;
+    background-color:#3AAFA9;
+  }
+
+  .employeeTable, .filterTable {
+    width: 100%;
+   
+  }
+  
+  .employeeTable th,
+  .filterTable th,
+  .employeeTable td {
+    padding: 10px;
+    text-align: left;
+    border: 0px solid #ddd;
+  }
+  
+ 
+ 
+  #filterRow{
+    position:sticky;
+    top: 100px;
+    z-index: 3;
+    border-right: hidden;
+    background-color:#7aeae4;
+  } 
+  #filterSection {
+    border-right: hidden;
+    padding: 20px;
+    background-color: #7aeae4;
+  }
+  #headingColumn {
+    margin-top: 50px;
+    position: sticky;
+    border-right: hidden;
+    top: 105px;
+    z-index: 33;
+    background-color:#7aeae4;
+  }
+  .filterTable {
+    position: sticky;
+    top: 53px;
+   border-right: hidden;
+    z-index: 333;
+    background-color: #7aeae4;
+  }
+  #personnelData {
+    position:sticky;
+    z-index: 3;
+    border-right: hidden;
+    overflow-y: scroll;
+   
+    padding-top: 150px;
+  }
+  #headingColumnDep {
+    margin-top: 50px;
+    position: relative;
+    top: 100px;
+    z-index: 33;
+    background-color:#7aeae4;
+  }
+  #depatmentRow{
+    position:relative;
+    top: 90px;
+    z-index: 3;
+    background-color:#7aeae4;
+  }
+  .align-right {
+    float:right;
+    font-size: large;
+  }
+   .style2,  .style4  {
+    display:none;
+  }
+   /* default iPad screens */
+}
+
+
+@media only screen and (min-device-width:769px) {
+
+  /* styles for browsers larger than 960px; */
+  #navContainer {
+    height: 53px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    background-color:#3AAFA9;
+  }
+  
+  #navbar {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+#navbarLogo{
+  color:#080808;
+}
+  
+  #menuContainer {
+    height: 100%;
+    width:250px;
+    position: absolute;
+    right: 0;
+     display:none;
+    align-items: center;
+  }
+  .menuTabs button {
+    color:#080808;
+   display: flex;
+     
+  }
+  
+  #menuButton {
+    font-size: large;
+    width: 50px;
+    position: absolute;
+    right: 10px;
+    background-color:transparent;
+    border:none;
+  }
+  
+  
+  #menuButton:hover  {
+    background:rgb(239, 239, 244);
+  }
+  
+  
+  #dropdownContainer {
+    width: 250px;
+    position: fixed;
+    top: 50px;
+    
+    right: -250px;
+    z-index: 99;
+    background-color:#3AAFA9;
+    box-shadow: 2px 2px 2px rgba(233, 237, 234, 0.5);
+    cursor: pointer;
+    
+  }
+  
+  #dropdownContainer.visible {
+    position: fixed;
+    right: 0;
+    z-index: 99;
+    transition: all 0.5s ease;
+    
+  }
+ 
+    
+  .menuOptions {
+    padding: 20px 20px ;
+    list-style: none;
+    text-align: right;
+    text-transform: uppercase;
+    color: white;
+    display:inline-block
+  }
+  
+  .menuOptions:hover {
+    color: black;
+    background-color: rgb(249, 249, 252);
+  }
+  
+  .menuOptions:active {
+    color: black;
+    background-color:#3AAFA9;
+  }
+
+  .employeeTable, .filterTable {
+    width: 100%;
+   
+  }
+  
+  .employeeTable th,
+  .filterTable th,
+  .employeeTable td {
+    padding: 10px;
+    text-align: left;
+    border: 0px solid #ddd;
+  }
+  
+ 
+
+  #filterRow{
+    position:sticky;
+    top: 100px;
+    z-index: 3;
+    border-right: hidden;
+    background-color:#7aeae4;
+  } 
+  #filterSection {
+    border-right: hidden;
+    padding: 20px;
+    background-color: #7aeae4;
+  }
+  #headingColumn {
+    margin-top: 50px;
+    position: sticky;
+    border-right: hidden;
+    top: 105px;
+    z-index: 33;
+    background-color:#7aeae4;
+  }
+  .filterTable {
+    position: sticky;
+    top: 53px;
+   border-right: hidden;
+    z-index: 333;
+    background-color: #7aeae4;
+  }
+  #personnelData {
+    position:sticky;
+    z-index: 3;
+    border-right: hidden;
+    overflow-y: scroll;
+   
+    padding-top: 150px;
+  }
+  #headingColumnDep {
+    margin-top: 50px;
+    position: relative;
+    top: 100px;
+    z-index: 33;
+    background-color:#7aeae4;
+  }
+  #depatmentRow{
+    position:relative;
+    top: 90px;
+    z-index: 3;
+    background-color:#7aeae4;
+  }
+  .align-right {
+    float:right;
+    font-size: large;
+  }
+}
