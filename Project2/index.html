@@ -59,15 +59,15 @@
     
                 <th class="style3" class="department-head department-col">
                   <select id="filterDept" class="form-select">
-                    <option id="depaFilter" value="reset" selected>Filter Departments</option>
+                    <option id="depaFilter" value="reset" selected >Filter Departments</option>
                   </select>
                 </th>
     
                 <th class="style2" class="location-head location-col">
                   <select id="filterLoc" class="form-select">
-                    <option value="reset" selected>Filter Locations</option>
-
-                  </select>
+                    <option id="locaFilter" value="reset" selected>Filter Locations</option>
+                </select>
+                
                 </th>
     
                 <th>
@@ -183,7 +183,7 @@
           </div>
           <div class="form-floating mb-3">
            
-            <input type="text" class="form-control" id="newJobTitle" placeholder="Enter Job Title" required>
+            <input type="text" class="form-control" id="newJobTitle" placeholder="Enter Job Title" >
             <label for="JobTitle">Job Title</label>
           </div>
           <div class="form-floating mb-3">
@@ -222,6 +222,7 @@
             <form id="editEmployeeForm">
                 <div class="form-row">
                 <div class="form-floating mb-3">
+                  <input type="hidden" id="employeeEditID">
                   <input type="text" class="form-control" id="editFirstName" name="editFirstName" required>
                     <label for="editFirstNameLabel">First Name</label>
                   
@@ -233,7 +234,7 @@
                 </div>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="editJob" name="editJobTitle" required>
+                  <input type="text" class="form-control" id="editJob" name="editJobTitle" >
                   <label for="editJobLabel">Job Title</label>
                   
               </div>
@@ -263,6 +264,8 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content shadow">
         <div class="modal-header bg-secondary bg-gradient text-white">
+          <input type="hidden" id="employeeDeleteID">
+          <input type="hidden" id="employeeDeleteName">
           <h5 class="modal-title" id="editDepartmentModalLabel">Delete employee</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -322,6 +325,7 @@
         </div>
         <div class="modal-body">
           <form id="editDepartmentForm">
+            <input type="hidden" id="departmentEditID">
             <div class="form-floating mb-3">
               
               <input type="text" class="form-control" id="editDepartmentName" name="editDepartmentName" required>
@@ -381,6 +385,7 @@
         </div>
         <div class="modal-body">
           <form id="editLoactionForm">
+            <input type="hidden" id="locationEditID">
             <div class="form-floating mb-3">
               
               <input type="text" class="form-control" id="editLocationName" name="editDepartmentName" required>
@@ -406,6 +411,8 @@
         </div>
         <div class="modal-body">
             <div >
+              <input type="hidden" id="departmentDeleteID">
+              <input type="hidden" id="departmentDeleteName">
              <p>Are you sure you want to delete the <span id="deleteDepartmentName4"></span> department? This action cannot be undone!</p>
             </div>
             <div class="modal-footer">
@@ -416,24 +423,7 @@
       </div>
     </div>
   </div>
-  <!-- deleteDepartmentConfirmationModal -->
-  <div class="modal fade" id="deleteDepartmentConfrimationModal" tabindex="-1" role="dialog" aria-labelledby="deleteDepartmentConfrimationModalLabel" aria-hidden="true"  data-bs-backdrop="false" data-bs-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content shadow">
-        <div class="modal-header bg-secondary bg-gradient text-white">
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" class="reloadB"></button>
-        </div>
-        <div class="modal-body">
-            <div >
-             <p> The <span id="deleteDepartmentName3"></span> department has been successfully deleted.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" class="reloadB">Close</button>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
   <!-- deleteDepartmentFailureModal -->
   <div class="modal fade" id="deleteDepartmentFailureModal" tabindex="-1" role="dialog" aria-labelledby="deleteDepartmentFailureModalLabel" aria-hidden="true"  data-bs-backdrop="false" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -462,6 +452,8 @@
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+            <input type="hidden" id="locationDeleteID">
+            <input type="hidden" id="locationDeleteName">
               <div>
                   <p>Are you sure you want to delete the <span id="deleteLocationName4"></span> location? This action cannot be undone!</p>
               </div>
@@ -473,24 +465,7 @@
       </div>
   </div>
 </div>
-<!-- deleteLocationConfirmationModal -->
-<div class="modal fade" id="deleteLocationConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteLocationConfirmationModalLabel" aria-hidden="true"  data-bs-backdrop="false" data-bs-keyboard="false">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content shadow">
-          <div class="modal-header bg-secondary bg-gradient text-white">
-              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" class="reloadB"></button>
-          </div>
-          <div class="modal-body">
-              <div>
-                  <p>The <span id="deleteLocationName3"></span> location has been successfully deleted.</p>
-              </div>
-              <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" class="reloadB">Close</button>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
+
 <!-- deleteLocationFailureModal -->
 <div class="modal fade" id="deleteLocationFailureModal" tabindex="-1" role="dialog" aria-labelledby="deleteLocationFailureModalLabel" aria-hidden="true"  data-bs-backdrop="false" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -525,13 +500,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
 
 <script type="application/javascript" src="libs/js/jquery-2.2.3.min.js"></script>
 <script type="application/javascript" src="libs/js/bootstrap/bootstrap.min.js"></script>
